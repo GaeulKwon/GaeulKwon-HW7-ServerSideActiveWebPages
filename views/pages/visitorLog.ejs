@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+</head>
+<body class="container">
+
+<header>
+    <% include ../partials/header %>
+</header>
+<main>
+  <div class="text-secondary">
+  <div class="jumbotron">
+      <h1>Who's there?  </h1> 
+      <h2>Leave me a message!</h2>
+
+      <%if (visitorArray != null) { %>
+       
+        <ul class="list-group">
+            <% for(var i=0; i<visitorArray.length; i++) {%>
+              <li class="list-group-item"><%= "Name:  " + visitorArray[i].name + " &nbsp;&nbsp; Message: " + visitorArray[i].message %></li>
+            <% } %>
+          </ul>
+
+
+        <% } %>
+
+     
+
+     
+      </br>
+      <label for="name">Your name?</label>
+      <input class="form-control" type="text" id="name" name="name"><br>
+      <label for="message">Say somethin'!</label>
+      <input class="form-control" type="text" id="message" name="message"><br>
+      <button class="btn btn-primary  " onclick="updateURL();">Leave your message </button>
+
+  </div>
+</div>
+</main>
+
+<footer>
+  <% include ../partials/footer %>
+</footer>
+<script type="text/javascript">
+// our menu calls this page URL with no ?id= value,
+// so code needs to check for that
+// when user enters data, I append the data using the required ?id=
+
+  function updateURL() {
+    // http://localhost:3000/uploadData?id=Terminator&date=1946
+    var myURL = (document.location).toString();
+    var n = myURL.indexOf("?");
+    myURL = myURL.substr(0, n); 
+    document.location = myURL + "?name=" + document.getElementById("name").value + 
+    "&message=" +  document.getElementById("message").value;
+
+  }
+</script>
+
+</body>
+</html>
